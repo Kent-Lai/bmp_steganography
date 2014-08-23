@@ -1,3 +1,10 @@
+in.bmp
+in_hex.txt
+out.bmp
+out_hex.txt
+test
+test.bmp
+
 # Compiled Object files
 *.slo
 *.lo
