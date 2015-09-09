@@ -79,8 +79,9 @@ int main(int argc, char **argv)
 
 	ifstream i_hd(argv[2], ifstream::binary);
 	vector<byte> byte_hidden_data;
-	while(i_hd.good())
-		byte_hidden_data.push_back(i_hd.get());
+	char ch;
+	while(i_hd.get(ch))
+		byte_hidden_data.push_back(ch);
 	i_hd.close();
 
 	cout << "Hidden data size : " << byte_hidden_data.size() << endl;
@@ -114,13 +115,13 @@ int main(int argc, char **argv)
 
 	vector<int> hv;
 	int bit_count = 0;
-	while(bit_count < bit_hidden_data.size() - 1)
+	while(bit_count < bit_hidden_data.size())
 	{
 		int t_hv = 0;
 		for(int i = 0; i < hb; i++)
 		{
 			t_hv = t_hv << 1 | bit_hidden_data[bit_count];
-			if(bit_count == bit_hidden_data.size() - 1)
+			if(bit_count == bit_hidden_data.size())
 				continue;
 			bit_count++;
 		}
@@ -143,7 +144,6 @@ int main(int argc, char **argv)
 		for(int j = 0; j < width * (bpp / 8) + pad_byte; j++)
 		{
 			//Change pixel values here.
-			cout << i + j << endl;
 			bmp_data[i + j] = (bmp_data[i + j] & hb_mask) | hv[i + j - offset];
 			if(i + j - offset + 1 == hv.size())
 			{
