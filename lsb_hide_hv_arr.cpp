@@ -140,9 +140,10 @@ int main(int argc, char **argv)
 	for(int i = offset; i < bmp_data.size(); i += width * (bpp / 8) + pad_byte)
 	{
 		bool is_end = false;
-		for(int j = 0; j < width * (bpp / 8); j++)
+		for(int j = 0; j < width * (bpp / 8) + pad_byte; j++)
 		{
 			//Change pixel values here.
+			cout << i + j << endl;
 			bmp_data[i + j] = (bmp_data[i + j] & hb_mask) | hv[i + j - offset];
 			if(i + j - offset + 1 == hv.size())
 			{
