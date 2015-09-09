@@ -3,6 +3,7 @@
 #include <vector>
 #include <cmath>
 #include <cstdlib>
+#include <cassert>
 
 #define width_ofst 0x0012 // bmp width offset
 #define height_ofst 0x0016 // bmp height offset
@@ -142,9 +143,8 @@ int main(int argc, char **argv)
 		for(int j = 0; j < width * (bpp / 8); j++)
 		{
 			//Change pixel values here.
-			bmp_data[i + j] = (bmp_data[i + j] & hb_mask) | hv[idx++];
-
-			if(idx == hv.size())
+			bmp_data[i + j] = (bmp_data[i + j] & hb_mask) | hv[i + j - offset];
+			if(i + j - offset + 1 == hv.size())
 			{
 				is_end = true;
 				break;
